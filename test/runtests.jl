@@ -30,6 +30,8 @@ function export_example(name::AbstractString, fmi_version::Integer)
     # the FMU is built from the script file itself, so the version is set in a copy
     example_dir =
         cp(joinpath(@__DIR__, "..", "examples", name), joinpath(mktempdir(), name))
+    # `cp` keeps the file permissions, the files of an added package (e.g. in PkgEval) are read-only
+    chmod(example_dir, 0o755; recursive = true)
     script = joinpath(example_dir, "src", "$(name).jl")
     pattern = r"^const FMI_VERSION = \d+"m
     code = read(script, String)
@@ -324,9 +326,14 @@ include(joinpath("neuralFMU", "neuralFMU.jl"))
     if Sys.iswindows() || Sys.islinux()
         @info "Automated testing is supported on Windows/Linux"
 
-        test_group = get(ENV, "FMIEXPORT_TEST_GROUP", "all")
+        # PkgEval stops the tests after 45 minutes, which is not enough to export all examples for
+        # both FMI versions, so it runs the group `pkgeval` (core and BouncingBall for FMI 2 and
+        # FMI 3), all examples are tested by the CI
+        default_test_group = get(ENV, "PKGEVAL", "false") == "true" ? "pkgeval" : "all"
+        test_group = get(ENV, "FMIEXPORT_TEST_GROUP", default_test_group)
         valid_test_groups = (
             "all",
+            "pkgeval",
             "core",
             "bouncing-ball-fmi2",
             "bouncing-ball-fmi3",
@@ -337,7 +344,7 @@ include(joinpath("neuralFMU", "neuralFMU.jl"))
         )
         @assert test_group in valid_test_groups "Unknown FMIEXPORT_TEST_GROUP: $(test_group)"
 
-        if test_group in ("all", "core")
+        if test_group in ("all", "pkgeval", "core")
             @testset "Model Description" begin
                 include("FMI2/model_description.jl")
                 include("FMI3/model_description.jl")
@@ -364,7 +371,8 @@ include(joinpath("neuralFMU", "neuralFMU.jl"))
         )
             for fmi_version in (2, 3)
                 # the test groups have the suffix of the FMI version, e.g. `-fmi2`
-                if test_group in ("all", "$(group)-fmi$(fmi_version)")
+                if test_group in ("all", "$(group)-fmi$(fmi_version)") ||
+                   (test_group == "pkgeval" && group == "bouncing-ball")
                     @testset "$(name) (FMI$(fmi_version))" begin
                         test_example(fmi_version)
                     end

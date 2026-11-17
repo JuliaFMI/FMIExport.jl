@@ -1,3 +1,8 @@
+#
+# Copyright (c) 2021 Tobias Thummerer, Lars Mikelsons
+# Licensed under the MIT license. See LICENSE file in the project root for details.
+#
+
 # the FMI version of the exported FMU (2 or 3)
 const FMI_VERSION = 3
 
@@ -117,14 +122,7 @@ fmu = FMIBUILD_CONSTRUCTOR(dirname(sourceFMU))
 # using Plots
 # plot(solution)
 
-# Use a project-local tmp dir instead of /tmp to avoid the Linux PkgEval permission issue.
-# This is only for the example export step and prevents the temporary model source files
-# from being created in the restricted Linux /tmp area used by PkgEval.
-tmp_root = joinpath(pwd(), ".tmp")
-mkpath(tmp_root)
-ENV["TMPDIR"] = tmp_root
-
-tmpDir = mktempdir(tmp_root; prefix = "fmibuildjl_test_", cleanup = false)
+tmpDir = mktempdir(; prefix = "fmibuildjl_test_", cleanup = false)
 @info "Saving example files at: $(tmpDir)"
 fmu_save_path = joinpath(tmpDir, "Manipulation.fmu")
 
