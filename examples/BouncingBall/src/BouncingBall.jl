@@ -1,8 +1,3 @@
-#
-# Copyright (c) 2021 Tobias Thummerer, Lars Mikelsons
-# Licensed under the MIT license. See LICENSE file in the project root for details.
-#
-
 # equations are a modified version of the Modelica reference FMUs:
 # https://github.com/modelica/Reference-FMUs/blob/main/BouncingBall/model.c
 
@@ -221,7 +216,14 @@ fmu = FMIBUILD_CONSTRUCTOR()
 # fmu.modelDescription.discreteStateValueReferences
 # fmu.modelDescription.outputValueReferences
 
-tmpDir = mktempdir(; prefix = "fmibuildjl_test_", cleanup = false)
+# Use a project-local tmp dir instead of /tmp to avoid the Linux PkgEval permission issue.
+# This is only for the example export step and prevents the temporary model source files
+# from being created in the restricted Linux /tmp area used by PkgEval.
+tmp_root = joinpath(pwd(), ".tmp")
+mkpath(tmp_root)
+ENV["TMPDIR"] = tmp_root
+
+tmpDir = mktempdir(tmp_root; prefix = "fmibuildjl_test_", cleanup = false)
 @info "Saving example files at: $(tmpDir)"
 fmu_save_path = joinpath(tmpDir, "BouncingBall.fmu")
 
