@@ -197,6 +197,16 @@ function run_fmpy_test(
     config_lines = String[],
     timeout_minutes = 5.0,
 )
+    # without Python (e.g. in the PkgEval sandbox), the exported FMU can't be checked with FMPy
+    if isnothing(Sys.which("python"))
+        @warn "Python not found, skipping the FMPy check of `$(basename(fmu_save_path))`."
+        @test_skip "FMPy check of $(basename(fmu_save_path))"
+        if cleanup_fmu && isfile(fmu_save_path)
+            rm(fmu_save_path)
+        end
+        return nothing
+    end
+
     test_path = joinpath(pwd(), test_dir)
     lockfile = joinpath(test_path, "lockfile.txt")
     logfile = joinpath(test_path, "FMPy-log.txt")
