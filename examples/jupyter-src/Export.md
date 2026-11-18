@@ -291,7 +291,7 @@ using FMIBuild: saveFMU                    # <= this must be excluded during exp
 ### FMIBUILD_NO_EXPORT_END ###
 ```
 
-    [36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSaving example files at: C:\Users\RUNNER~1\AppData\Local\Temp\fmibuildjl_test_iNlZLO
+    [36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSaving example files at: C:\Users\RUNNER~1\AppData\Local\Temp\fmibuildjl_test_fpPFnm
     
 
 ## Simulate the FMU 
@@ -328,10 +328,10 @@ plot(solution; states=false) # don't plot states
     [33m[1m└ [22m[39m[90m@ FMIBase C:\Users\runneradmin\.julia\packages\FMIBase\OYsGD\src\printing.jl:30[39m
     [34mSimulating ME-FMU ...   0%|█                            |  ETA: N/A[39m
 
-    [34mSimulating ME-FMU ... 100%|█████████████████████████████| Time: 0:00:07[39m
+    [34mSimulating ME-FMU ... 100%|█████████████████████████████| Time: 0:00:08[39m
     
 
-    [33m[1m┌ [22m[39m[33m[1mWarning: [22m[39mUnknown instance at Ptr{Nothing} @0x000001f187138490.
+    [33m[1m┌ [22m[39m[33m[1mWarning: [22m[39mUnknown instance at Ptr{Nothing} @0x000001de33784b50.
     [33m[1m└ [22m[39m[90m@ FMIExport D:\a\FMIExport.jl\FMIExport.jl\src\FMI2\simple.jl:56[39m
     
 
@@ -354,12 +354,12 @@ plot(solution; states=false)
     [33m[1m└ [22m[39m[90m@ FMIBase C:\Users\runneradmin\.julia\packages\FMIBase\OYsGD\src\printing.jl:30[39m
     
 
-    [34mSim. CS-FMU ...   0%|█                                  |  ETA: 0:10:04[39m
+    [34mSim. CS-FMU ...   0%|█                                  |  ETA: 0:11:30[39m
 
     [34mSim. CS-FMU ... 100%|███████████████████████████████████| Time: 0:00:02[39m
     
 
-    [33m[1m┌ [22m[39m[33m[1mWarning: [22m[39mUnknown instance at Ptr{Nothing} @0x000001f186abba90.
+    [33m[1m┌ [22m[39m[33m[1mWarning: [22m[39mUnknown instance at Ptr{Nothing} @0x000001de346cdd50.
     [33m[1m└ [22m[39m[90m@ FMIExport D:\a\FMIExport.jl\FMIExport.jl\src\FMI2\simple.jl:56[39m
     
 
