@@ -291,7 +291,7 @@ using FMIBuild: saveFMU                    # <= this must be excluded during exp
 ### FMIBUILD_NO_EXPORT_END ###
 ```
 
-    [36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSaving example files at: C:\Users\RUNNER~1\AppData\Local\Temp\fmibuildjl_test_2WYMPq
+    [36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSaving example files at: C:\Users\RUNNER~1\AppData\Local\Temp\fmibuildjl_test_iNlZLO
     
 
 ## Simulate the FMU 
@@ -326,14 +326,12 @@ plot(solution; states=false) # don't plot states
 
     [33m[1m┌ [22m[39m[33m[1mWarning: [22m[39mfmi2Instantiate!(...): This component was already registered. This may be because you created the FMU by yourself with FMIExport.jl.
     [33m[1m└ [22m[39m[90m@ FMIBase C:\Users\runneradmin\.julia\packages\FMIBase\OYsGD\src\printing.jl:30[39m
-    
-
     [34mSimulating ME-FMU ...   0%|█                            |  ETA: N/A[39m
 
-    [34mSimulating ME-FMU ... 100%|█████████████████████████████| Time: 0:00:06[39m
+    [34mSimulating ME-FMU ... 100%|█████████████████████████████| Time: 0:00:07[39m
     
 
-    [33m[1m┌ [22m[39m[33m[1mWarning: [22m[39mUnknown instance at Ptr{Nothing} @0x00000214bfa1a890.
+    [33m[1m┌ [22m[39m[33m[1mWarning: [22m[39mUnknown instance at Ptr{Nothing} @0x000001f187138490.
     [33m[1m└ [22m[39m[90m@ FMIExport D:\a\FMIExport.jl\FMIExport.jl\src\FMI2\simple.jl:56[39m
     
 
@@ -354,12 +352,14 @@ plot(solution; states=false)
 
     [33m[1m┌ [22m[39m[33m[1mWarning: [22m[39mfmi2Instantiate!(...): This component was already registered. This may be because you created the FMU by yourself with FMIExport.jl.
     [33m[1m└ [22m[39m[90m@ FMIBase C:\Users\runneradmin\.julia\packages\FMIBase\OYsGD\src\printing.jl:30[39m
-    [34mSim. CS-FMU ...   0%|█                                  |  ETA: 0:09:14[39m
-
-    [34mSim. CS-FMU ... 100%|███████████████████████████████████| Time: 0:00:01[39m
     
 
-    [33m[1m┌ [22m[39m[33m[1mWarning: [22m[39mUnknown instance at Ptr{Nothing} @0x00000214bf84d450.
+    [34mSim. CS-FMU ...   0%|█                                  |  ETA: 0:10:04[39m
+
+    [34mSim. CS-FMU ... 100%|███████████████████████████████████| Time: 0:00:02[39m
+    
+
+    [33m[1m┌ [22m[39m[33m[1mWarning: [22m[39mUnknown instance at Ptr{Nothing} @0x000001f186abba90.
     [33m[1m└ [22m[39m[90m@ FMIExport D:\a\FMIExport.jl\FMIExport.jl\src\FMI2\simple.jl:56[39m
     
 
